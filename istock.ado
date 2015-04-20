@@ -9,12 +9,18 @@ program define istock, rclass
 		Probplot
 		Rateplot
 		Export
-		Filter(int 40)
+		MAXlevel(int 40)
+		MINlevel(int -20)
 		PRINT
 		Cellwidth(int 15)
+		Graphpath(string)
 		Header
 	];
 	#delimit cr
+	
+	if "`graphpath'" == "" local graphpath = "graph"
+	capture confirm file "`graphpath'"
+	if _rc != 0 mkdir "`graphpath'"
 	
 	if "`dir'" == "" local dir = "~/Documents/Github/stock1m/history"
 	local path = "`dir'/`ticker'"
@@ -69,8 +75,11 @@ program define istock, rclass
 		gen rl`i'p = .
 	}
 	
-	local max = `filter'
-	local maxvar = "."
+	local max = `maxlevel'
+	local min = `minlevel'
+	
+	local maxvar = "*"
+	local minvar = "*"
 	quietly forvalues n = 1/`span' {
 		
 		local var = "r" + string(`n', "%03.0f") + "d"
@@ -82,7 +91,7 @@ program define istock, rclass
 		gen `var' = 100 * (close[_n] - close[_n+`n']) / close[_n+`n']
 		irange `var' if _n <= `span', level(99.9)
 		
-		if `max' < r(max) {
+		if `max' < r(max) & r(max) < . {
 			local max = r(max)
 			local maxvar = "`var'"
 			
@@ -93,6 +102,19 @@ program define istock, rclass
 					"{ralign `cellwidth':`ticker' }{txt:{c |}}"
 					"{ralign `cellwidth':`var'}"
 					"{ralign `cellwidth':" %9.5f r(max) "%}";
+				#delimit cr
+			}
+		}
+		if `min' > r(min) {
+			local min = r(min)
+			local minvar = "`var'"
+			noisily if "`print'" != "" {		
+				#delimit ;
+				dis "{txt}{hline `cellwidth'}{c +}{hline `=`cellwidth'*2'}";
+				dis "{res}"
+					"{ralign `cellwidth':`ticker' }{txt:{c |}}"
+					"{ralign `cellwidth':`var'}"
+					"{ralign `cellwidth':" %9.5f r(min) "%}";
 				#delimit cr
 			}
 		}
@@ -131,7 +153,7 @@ program define istock, rclass
 		ytitle("Yields(%)") xtitle("Invest Periodic Span(days)");
 		#delimit cr
 		if "`export'" != "" {
-			graph export "graph/`ticker'-P.pdf", as(pdf) replace
+			graph export "`graphpath'/`ticker'-P.pdf", as(pdf) replace
 		}
 	}
 	
@@ -192,12 +214,13 @@ program define istock, rclass
 		#delimit cr
 		
 		if "`export'" != "" {
-			graph export "graph/`ticker'-R.pdf", as(pdf) replace
+			graph export "`graphpath'/`ticker'-R.pdf", as(pdf) replace
 		}
 	}
 	
 	return scalar max = `max'
-	return local var = "`maxvar'"
+	return scalar min = `min'
+	return local minvar = "`minvar'"
+	return local maxvar = "`maxvar'"
 	return local ticker = "`ticker'"
-	
 end
