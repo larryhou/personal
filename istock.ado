@@ -75,8 +75,8 @@ program define istock, rclass
 		gen rl`i'p = .
 	}
 	
-	local max = `maxlevel'
-	local min = `minlevel'
+	local max = -10000
+	local min = +10000
 	
 	local maxvar = "*"
 	local minvar = "*"
@@ -95,7 +95,7 @@ program define istock, rclass
 			local max = r(max)
 			local maxvar = "`var'"
 			
-			noisily if "`print'" != "" {		
+			noisily if "`print'" != "" & `max' >= `maxlevel' {		
 				#delimit ;
 				dis "{txt}{hline `cellwidth'}{c +}{hline `=`cellwidth'*2'}";
 				dis "{res}"
@@ -108,7 +108,7 @@ program define istock, rclass
 		if `min' > r(min) {
 			local min = r(min)
 			local minvar = "`var'"
-			noisily if "`print'" != "" {		
+			noisily if "`print'" != "" & `min' < `minlevel'{		
 				#delimit ;
 				dis "{txt}{hline `cellwidth'}{c +}{hline `=`cellwidth'*2'}";
 				dis "{res}"
