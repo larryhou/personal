@@ -1,0 +1,12 @@
+cd "/Users/larryhou/Documents/Stata/workspace/Stock"
+doedit study
+do "/Users/larryhou/Documents/Stata/workspace/Stock/study.do"
+use stock
+browse
+drop if yield == .
+sum
+sort yield
+browse
+gsort - yield
+format yield %5.2f
+browse
