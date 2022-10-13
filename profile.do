@@ -3,7 +3,7 @@ log using ~/Documents/Stata/personal/stata.log, smcl replace
 
 sysdir set PERSONAL "~/Documents/Stata/personal"
 sysdir set PLUS "~/Documents/Stata/plus"
-graph set window fontface "AndaleMono"
+graph set window fontface "JetBrainsMono-Thin"
 
 cd ~/Documents/Stata/workspace
 
