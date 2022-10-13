@@ -1,0 +1,56 @@
+*!  version 1.0.0  13oct2022
+
+#include s1rcolor
+
+color background    gs3
+
+* grid
+color major_grid        "54 54 54"
+color minor_grid        "54 54 54"
+yesno draw_major_vgrid  yes
+yesno draw_major_hgrid  yes
+
+* axis
+color       axisline     gs6
+color       tick         gs6
+color       minortick    gs6
+linewidth   axisline     medium
+color       tick_label   gs8
+gsize       tick_label   vsmall
+
+* plotregion
+color       plotregion       gs3
+color       plotregion_line  none
+linewidth   plotregion       none
+linestyle   plotregion       none
+margin      plotregion       tiny
+margin      graph            small
+
+* legend
+gsize         legend_key_xsize   tiny
+gsize         legend_row_gap     zero
+gsize         legend_col_gap     tiny
+gsize         legend_key_gap     zero
+gsize         key_gap            zero
+gsize         key_label          tiny
+color         key_label          gs8
+color         legend             none
+color         legend_line        none
+margin        legend             zero
+margin        key_label          tiny
+horizontal    key_label          left
+vertical_text key_label          middle
+gridringstyle legend_ring        0
+clockdir      legend_position    5
+
+* line
+color p16    cyan 
+color p17    cranberry  
+color p18    brown  
+color p19    gold  
+color p20    green  
+color p21    maroon 
+color p22    sienna  
+color p23    purple  
+color p24    khaki   
+color p25    erose  
