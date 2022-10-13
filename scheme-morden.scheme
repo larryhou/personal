@@ -1,6 +1,8 @@
 *!  version 1.0.0  13oct2022
 
 #include s1rcolor
+* help scheme_files
+* help scheme entries
 
 color background    gs3
 
@@ -48,15 +50,3 @@ horizontal    key_label          left
 vertical_text key_label          middle
 gridringstyle legend_ring        0
 clockdir      legend_position    5
-
-* line
-color p16    cyan 
-color p17    cranberry  
-color p18    brown  
-color p19    gold  
-color p20    green  
-color p21    maroon 
-color p22    sienna  
-color p23    purple  
-color p24    khaki   
-color p25    erose  
