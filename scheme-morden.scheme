@@ -11,12 +11,16 @@ yesno draw_major_vgrid  yes
 yesno draw_major_hgrid  yes
 
 * axis
-color       axisline     gs6
-color       tick         gs6
-color       minortick    gs6
-linewidth   axisline     medium
-color       tick_label   gs8
-gsize       tick_label   vsmall
+color       axisline        gs6
+color       tick            gs6
+color       minortick       gs6
+linewidth   axisline        medium
+color       tick_label      gs8
+color       axis_title      gs12
+gsize       tick_label      vsmall
+gsize       axis_title      small
+gsize       axis_title_gap  zero
+margin      axis_title      zero
 
 * plotregion
 color       plotregion       gs3
