@@ -27,6 +27,8 @@ margin      plotregion       tiny
 margin      graph            small
 
 * legend
+graphsize     x                  16
+graphsize     y                  9
 gsize         legend_key_xsize   tiny
 gsize         legend_row_gap     zero
 gsize         legend_col_gap     tiny
